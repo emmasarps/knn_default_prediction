@@ -12,32 +12,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-    - name: Set up R
-      uses: r-lib/actions/setup-r@v2
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
 
-    - name: Cache R packages
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/R
-        key: ${{ runner.os }}-r-${{ hashFiles('**/*.R') }}
-        restore-keys: |
-          ${{ runner.os }}-r-
+      - name: Cache R packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/R
+          key: ${{ runner.os }}-r-${{ hashFiles('**/*.R') }}
+          restore-keys: |
+            ${{ runner.os }}-r-
 
-       - name: Install R Packages
-      run: |
-        Rscript -e '
-          options(repos = c(CRAN = "https://cran.rstudio.com"))
+      - name: Install R Packages
+        run: |
+          Rscript -e "options(repos = c(CRAN = 'https://cran.rstudio.com'))" -e "
           install_if_missing <- function(pkg) {
             if (!requireNamespace(pkg, quietly = TRUE)) {
               install.packages(pkg, dependencies = TRUE)
             }
           }
-          pkgs <- c("kknn", "ggplot2", "caret", "dplyr", "gridExtra", "tidyverse", "ISLR")
+          pkgs <- c('kknn', 'ggplot2', 'caret', 'dplyr', 'gridExtra', 'tidyverse', 'ISLR')
           for (pkg in pkgs) install_if_missing(pkg)
-        '
-    - name: Run KNN Script
-      run: |
-        Rscript R/credit_default_pro.R
+          "
+
+      - name: Run KNN Script
+        run: |
+          Rscript R/credit_default_pro.R
