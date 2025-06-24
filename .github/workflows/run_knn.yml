@@ -26,10 +26,18 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-r-
 
-    - name: Install R Packages
+       - name: Install R Packages
       run: |
-        Rscript -e 'options(repos = c(CRAN = "https://cloud.r-project.org")); install.packages(c("kknn", "ggplot2", "caret", "dplyr", "gridExtra", "tidyverse", "ISLR"), dependencies=TRUE)'
-
+        Rscript -e '
+          options(repos = c(CRAN = "https://cran.rstudio.com"))
+          install_if_missing <- function(pkg) {
+            if (!requireNamespace(pkg, quietly = TRUE)) {
+              install.packages(pkg, dependencies = TRUE)
+            }
+          }
+          pkgs <- c("kknn", "ggplot2", "caret", "dplyr", "gridExtra", "tidyverse", "ISLR")
+          for (pkg in pkgs) install_if_missing(pkg)
+        '
     - name: Run KNN Script
       run: |
         Rscript R/credit_default_pro.R
