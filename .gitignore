@@ -1,0 +1,18 @@
+# R-specific ignores
+.Rhistory
+.Rapp.history
+.RData
+.Ruserdata
+.Rproj.user/
+.Rproj.user
+.Renviron
+
+# System
+.DS_Store
+
+# Plots/output
+*.png
+
+# Secrets (if any in future)
+*.env
+
