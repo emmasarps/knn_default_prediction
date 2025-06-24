@@ -27,7 +27,9 @@ jobs:
           ${{ runner.os }}-r-
 
     - name: Install R Packages
-      run: Rscript R/install_packages.R
+      run: |
+        Rscript -e 'options(repos = c(CRAN = "https://cloud.r-project.org")); install.packages(c("kknn", "ggplot2", "caret", "dplyr", "gridExtra", "tidyverse", "ISLR"), dependencies=TRUE)'
 
     - name: Run KNN Script
-      run: Rscript R/credit_default_pro.R
+      run: |
+        Rscript R/credit_default_pro.R
