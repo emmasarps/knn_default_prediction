@@ -27,7 +27,7 @@ jobs:
           docker run -v ${{ github.workspace }}:/app -w /app knn-r-script
 
       - name: Upload plot images
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: knn-plots
           path: |
