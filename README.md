@@ -63,24 +63,36 @@ cd knn_default_prediction
 ```
 
 Then open R and run:
+
+```r
 source("R/credit_default_pro.R")
+```
 
+---
 
-🐳 Option 2: Run with Docker (Recommended)
+### 🐳 Option 2: Run with Docker (Recommended)
+
+```bash
 docker build -t knn-r-script .
 docker run -v $(pwd):/app -w /app knn-r-script
+```
 
+This will generate all output plots inside the `plots/` directory.
 
-This will generate all output plots inside the plots/ directory.
+---
 
-🤖CI/CD with GitHub Actions**
-- Builds the Docker image
-- Runs the R script in a clean container
-- Uploads result plots as artifacts
+### 🤖 CI/CD with GitHub Actions
+
+- Builds the Docker image  
+- Runs the R script in a clean container  
+- Uploads result plots as artifacts  
 - Enables reproducibility via automation
 
+---
 
-📂 Folder Structure
+### 📁 Folder Structure
+
+```
 knn_default_prediction/
 ├── R/
 │   └── credit_default_pro.R         # Main R script
@@ -95,3 +107,4 @@ knn_default_prediction/
 │   └── workflows/
 │       └── run_knn.yml              # GitHub Actions workflow
 └── README.md
+```
