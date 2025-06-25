@@ -1,5 +1,5 @@
 🌟 Credit Default Prediction Using K-Nearest Neighbors (KNN) in R  
-This project demonstrates how to apply the K-Nearest Neighbors (KNN) algorithm (with k = 7 and k = 9) to predict credit default based on customer balance and income. It also includes data visualization, evaluation metrics, and DevOps best practices like version control, folder structure, and reproducibility.
+This project demonstrates how to apply the K-Nearest Neighbors (KNN) algorithm (with k = 7 and k = 9) to predict credit default based on customer balance and income. It also includes data visualization, evaluation metrics, and DevOps best practices like version control, folder structure, containerization using Docker, and automation via GitHub Actions.
 
 ---
 
@@ -49,23 +49,36 @@ This project demonstrates how to apply the K-Nearest Neighbors (KNN) algorithm (
 
 🛠️  Tech Stack  
 - **Language**: R  
-- **Libraries**: `kknn`, `ggplot2`, `caret`, `dplyr`, `gridExtra`
+- **Libraries**: `kknn`, `ggplot2`, `caret`, `dplyr`, `gridExtra`, `tidyverse`, `descr`
 
 ---
 
-🚀 How to Run  
-1. Clone the repository:
+🚀 How to Run the Project
 
+### 🧪 Option 1: Run Locally Using R
+
+```bash
 git clone https://github.com/emmasarps/knn_default_prediction.git
 cd knn_default_prediction
 
+Rscript run_knn.R
+Then open R and run:
+source("knn_default_prediction.R")
 
-2. Open the R script:
+🐳  **Option 2**: Run with Docker (Recommended)
+docker build -t knn-r-script .
+docker run -v $(pwd):/app -w /app knn-r-script
 
-source("R/credit_default_pro.R")
+This will generate all output plots inside the plots/ directory.
+
+🤖 **CI/CD with GitHub Actions**
+- Builds the Docker image
+- Runs the R script in a clean container
+- Uploads result plots as artifacts
+- Enables reproducibility via automation
 
 
-3. Folder Structure
+📂 Folder Structure
 knn_default_prediction/
 ├── R/
 │   └── credit_default_pro.R         # Main R script
@@ -75,5 +88,8 @@ knn_default_prediction/
 │   ├── balance_vs_income_scatter.png
 │   ├── income_histogram.png
 │   └── knn_decision_boundary_k7.png
+├── Dockerfile
+├── .github/
+│   └── workflows/
+│       └── run_knn.yml              # GitHub Actions workflow
 └── README.md
-
