@@ -18,11 +18,17 @@ jobs:
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
 
-      - name: Install R packages
-        run: |
-          Rscript -e "install.packages(c('ISLR', 'tidyverse', 'descr', 'caret', 'kknn'), repos = 'https://cloud.r-project.org')"
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            tidyverse
+            ISLR
+            descr
+            caret
+            kknn
 
-      - name: Run credit_default_pro.R
+      - name: Run R Script
         run: Rscript R/credit_default_pro.R
 
       - name: Upload plots
