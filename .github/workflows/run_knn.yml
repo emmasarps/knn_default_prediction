@@ -23,7 +23,7 @@ jobs:
           docker run --rm \
             -v ${{ github.workspace }}:/app \
             -w /app \
-            kwasisarpong/knn-r-script:latest
+            kwasisarpong/knn-r-script:latest Rscript R/credit_default_pro.R
 
       - name: Upload plot images
         uses: actions/upload-artifact@v4
