@@ -20,11 +20,14 @@ jobs:
 
       - name: Run R script inside Docker container
         run: |
-          docker run -v ${{ github.workspace }}:/app -w /app kwasisarpong/knn-r-script:latest
+          docker run --rm \
+            -v ${{ github.workspace }}:/app \
+            -w /app \
+            kwasisarpong/knn-r-script:latest
 
       - name: Upload plot images
         uses: actions/upload-artifact@v4
         with:
           name: knn-plots
           path: |
-            *.png
+            plots/*.png
