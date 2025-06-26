@@ -1,4 +1,4 @@
-name: Run R Script and Upload Plots
+name: Run R Script
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-r:
+  run-r-script:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
 
       - name: Install R packages
         run: |
-          Rscript -e "install.packages(c('ISLR','tidyverse', 'descr', 'caret', 'kknn'), repos = 'https://cloud.r-project.org')"
+          Rscript -e "install.packages(c('ISLR', 'tidyverse', 'descr', 'caret', 'kknn'), repos = 'https://cloud.r-project.org')"
 
       - name: Run credit_default_pro.R
         run: Rscript R/credit_default_pro.R
@@ -29,4 +29,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: knn-plots
-          path: plots/
+          path: |
+            plots/*.png
