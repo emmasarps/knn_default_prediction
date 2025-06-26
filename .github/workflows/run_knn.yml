@@ -1,9 +1,8 @@
-name: Build and Run KNN R Script in Docker
+name: Run KNN R Script Using Docker Hub Image
 
 on:
   push:
     paths:
-      - Dockerfile
       - R/**
       - .github/workflows/**
   workflow_dispatch:
@@ -16,28 +15,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Set up Docker layer cache
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-docker-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-docker-
-      - name: Build Docker image with cache
-        run: |
-          docker buildx build \
-            --cache-from=type=local,src=/tmp/.buildx-cache \
-            --cache-to=type=local,dest=/tmp/.buildx-cache,mode=max \
-            --load \
-            -t knn-r-script .
-
+      - name: Pull prebuilt Docker image from Docker Hub
+        run: docker pull kwasisarpong/knn-r-script:latest
 
       - name: Run R script inside Docker container
         run: |
-          docker run -v ${{ github.workspace }}:/app -w /app knn-r-script
+          docker run -v ${{ github.workspace }}:/app -w /app kwasisarpong/knn-r-script:latest
 
       - name: Upload plot images
         uses: actions/upload-artifact@v4
