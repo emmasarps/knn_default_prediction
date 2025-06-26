@@ -20,6 +20,7 @@ jobs:
 
       - name: Install R dependencies (CRAN + GitHub)
         run: |
+          Rscript -e "install.packages('devtools', repos = 'https://cloud.r-project.org')"
           Rscript -e "install.packages(c('tidyverse', 'ISLR', 'descr', 'caret', 'kknn', 'devtools'), repos = 'https://cloud.r-project.org')"
           Rscript -e "devtools::install_github('cttobin/ggthemr')"
 
