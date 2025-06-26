@@ -20,7 +20,7 @@ jobs:
 
       - name: Install R packages
         run: |
-          Rscript -e "install.packages(c('tidyverse', 'descr', 'caret', 'kknn'), repos = 'https://cloud.r-project.org')"
+          Rscript -e "install.packages(c('ISLR','tidyverse', 'descr', 'caret', 'kknn'), repos = 'https://cloud.r-project.org')"
 
       - name: Run credit_default_pro.R
         run: Rscript R/credit_default_pro.R
