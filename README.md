@@ -117,11 +117,7 @@ knn_default_prediction/
 │       └── run_knn.yml              # GitHub Actions workflow
 └── README.md
 ```
-🧑‍💻 Author
-Emmanuel Sarpong
-🐳 Docker Hub: kwasisarpong
 
-kwasisarpong
 
 📄 License
 This project is open-source and licensed under the MIT License.
