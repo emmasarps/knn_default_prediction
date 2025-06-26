@@ -38,11 +38,11 @@ This project demonstrates how to apply the K-Nearest Neighbors (KNN) algorithm (
 | Recall     | 0.50    |
 | F1 Score   | 0.63    |
 
-✅ **Observation:** Increasing `k` from 7 to 9 slightly improves precision and F1, while reducing recall.
+**Observation:** Increasing `k` from 7 to 9 slightly improves precision and F1, while reducing recall.
 
 ---
 
-🖼️  Sample Visualization  
+ Sample Visualization  
 ![Decision Boundary (k=7)](plots/knn_decision_boundary_k7.png)
 
 ---
@@ -73,20 +73,27 @@ source("R/credit_default_pro.R")
 ### 🐳 Option 2: Run with Docker (Recommended)
 
 ```bash
-docker build -t knn-r-script .
-docker run -v $(pwd):/app -w /app knn-r-script
+docker pull kwasisarpong/knn-r-script:latest
+docker run --rm kwasisarpong/knn-r-script:latest
 ```
-
+Or build manually and run:
+```bash
+docker pull kwasisarpong/knn-r-script:latest
+docker run --rm kwasisarpong/knn-r-script:latest
+```
 This will generate all output plots inside the `plots/` directory.
 
 ---
 
-### 🤖 CI/CD with GitHub Actions
+###  CI/CD with GitHub Actions
 
 - Builds the Docker image  
 - Runs the R script in a clean container  
 - Uploads result plots as artifacts  
-- Enables reproducibility via automation
+-Automates and documents model runs
+📂 Workflow: `.github/workflows/run_knn.ym`
+
+
 
 ---
 
@@ -103,8 +110,18 @@ knn_default_prediction/
 │   ├── income_histogram.png
 │   └── knn_decision_boundary_k7.png
 ├── Dockerfile
+├── .dockerignore
+├── .gitignore
 ├── .github/
 │   └── workflows/
 │       └── run_knn.yml              # GitHub Actions workflow
 └── README.md
 ```
+🧑‍💻 Author
+Emmanuel Sarpong
+🐳 Docker Hub: kwasisarpong
+
+kwasisarpong
+
+📄 License
+This project is open-source and licensed under the MIT License.
