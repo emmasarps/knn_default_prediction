@@ -1,0 +1,6 @@
+.git
+plots/
+*.png
+.DS_Store
+README.md
+.github/
