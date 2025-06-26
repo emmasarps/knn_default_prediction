@@ -1,4 +1,4 @@
-name: Run KNN R Script Using Docker Hub Image
+name: Run R Script and Upload Plots
 
 on:
   push:
@@ -8,26 +8,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  knn-docker:
+  run-r:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Pull prebuilt Docker image from Docker Hub
-        run: docker pull kwasisarpong/knn-r-script:latest
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
 
-      - name: Run R script inside Docker container
+      - name: Install R packages
         run: |
-          docker run --rm \
-            -v ${{ github.workspace }}:/app \
-            -w /app \
-            kwasisarpong/knn-r-script:latest Rscript R/credit_default_pro.R
+          Rscript -e "install.packages(c('tidyverse', 'descr', 'caret', 'kknn'), repos = 'https://cloud.r-project.org')"
 
-      - name: Upload plot images
+      - name: Run credit_default_pro.R
+        run: Rscript R/credit_default_pro.R
+
+      - name: Upload plots
         uses: actions/upload-artifact@v4
         with:
           name: knn-plots
-          path: |
-            plots/*.png
+          path: plots/
